@@ -3,7 +3,7 @@ from discord.ext import commands
 import aiohttp
 import os
 
-unsplash = os.getenv("ooGw9uAv1MDNQHDWErCg5UIetgOFStXEEutjJqOUeXo")
+unsplash = os.getenv("Confidential")
 
 #client = commands.Bot(command_prefix = '!')
 client = discord.Client()
@@ -38,4 +38,4 @@ async def  image(ctx, *, search):
         else:
             await ctx.send(f'Error when making request. {r.status}')
 
-client.run('OTU4NDM0OTM5MTEwNTU1NzQ4.YkNSGA.7mlF8lGQNFK4JumXC9KvFfo2Mv8')
+client.run('Confidential')

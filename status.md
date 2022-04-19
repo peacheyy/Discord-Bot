@@ -6,7 +6,7 @@ Evan Peachey, Mia Dubac
 
 #### Your section leader's name
 
-Sky Gao?
+Sky Gao, Joanne Nichols
 
 #### Project title
 
@@ -22,7 +22,7 @@ Figured out the discord library and worked on testing different features for the
 
 #### What have you not done for your project yet?
 
-Haven't figured out how to do a picture search command
+Haven't figured out how to do a picture search command and insert profile pictures over images
 
 #### What problems, if any, have you encountered?
 

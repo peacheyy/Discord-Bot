@@ -1,8 +1,7 @@
 import random
+import discord
 from discord.ext import commands
-import unsplash
-from unsplash.api import Api
-from unsplash.auth import Auth
+import aiohttp
 
 
 
@@ -11,6 +10,16 @@ client = commands.Bot(command_prefix = '.')
 @client.event
 async def on_ready():
     print('Logged on as {0.user}!'.format(client))
+
+intents = discord.Intents().default()
+intents.members = True
+
+
+@client.event
+async def on_member_join(member):
+    guild = client.get_guild(958431195518078976)
+    channel = guild.get_channel(963570887746019328)
+    await channel.send(f'Welcome to the server {member.mention}!')
 
 @client.command()
 async def ping(ctx):
@@ -31,22 +40,46 @@ async def on_message(message):
             await message.channel.send(f'Hello {username}!')'''
 #Evan's code for welcome
 
+'''client_id = "ooGw9uAv1MDNQHDWErCg5UIetgOFStXEEutjJqOUeXo"
+client_secret = "GzJQu11kfECh2yWXiPiY6ZMOOt9zRBXol8zw0o7y6JI"
+redirect_uri = "urn:ietf:wg:oauth:2.0:oob"
+code = ""
 
+auth = Auth(client_id, client_secret, redirect_uri, code=code)
+api = Api(auth)
 
-'''
-@client.event
-async def  image(ctx, *, search):
-    url = f'https://api.unsplash.com/photos/random/?query={search}&orientation=squarish&client_id={unsplash}'
+api.search.photos("office")
+
+@client.command()
+async def image(ctx, *, search):
+    search = search.replace(' ', '')
+    url = f'https://api.unsplash.com/photos/random/?query={search}&orientation=squarish&client_id={auth}'
     async with client.ses.get(url) as picture:
         if picture.status in range(200, 299):
-        
+            data = await picture.json()
+            url = data['urls']['regular']
+            mbed = discord.Embed(
+                title = 'Here is your image'
+                ).set_image(url=url)
+            await ctx.send(embed=mbed)
         else:
             await ctx.send(f'Error when making request. {picture.status}')'''
 
 
 
+@client.command()
+async def image(ctx, arg):
+    async with aiohttp.ClientSession() as session:
+        request = await session.get(f'https://some-random-api.ml/img/{arg}')
+        imagejson = await request.json()
+    embed = discord.Embed(title = f'{arg}', color = discord.Color.purple())
+    embed.set_image(url=imagejson['link'])
+    await ctx.send(embed=embed)
 
 @client.command()
+async def images(ctx):
+    await ctx.send(f'Cat, Dog, Owl')
+"""@client.command()
 async def insult(ctx):
     insult = ''
     if ctx.channel.name == 'general':
@@ -65,7 +98,7 @@ async def insult(ctx):
         elif user_message.lower() == '!insult tame':
             tame_list = ['stinky','smelly','weird','ugly','dumb','awkward','short','disappointing']
             tame = random.choice(tame_list)
-            insult = insult + {username} + 'is' + tame
+            insult = insult + {username} + 'is' + tame"""
 
 #work on the roasts and tame section a bit more; change it up
 
@@ -77,4 +110,4 @@ async def disastergirl_meme():
 #https://github.com/C4MIV3R/pancakeBot/blob/master/commands/catboy.js
 #code help
 
-client.run('')
+client.run('OTU4NDM0OTM5MTEwNTU1NzQ4.YkNSGA.pvj_NZT1IFowxM3lXB8T6_EqoXg')

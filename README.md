@@ -1,6 +1,7 @@
 # Discord-Bot
 <b> Final project for Introduction to Problem solving and Programming in Python </b> <br />
 Video showing off the program: https://youtu.be/bI9ZB5zixKE/ <br />
+
 <b>Overview: </b>
 
 Writing the code for the Discord bot wasn't inherently challenging until we incorportated websites into the commands. In order to create a proper image search command, you need a website that you can take images from.
